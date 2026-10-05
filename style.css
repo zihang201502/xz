@@ -107,10 +107,7 @@ h1 {
     letter-spacing: -2px;
     line-height: 1.1;
     margin-bottom: 12px;
-    background: linear-gradient(180deg, #ffffff 0%, #a0e8d8 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: #ffffff;
     opacity: 0;
     transform: translateY(20px);
     animation: fadeInUp 1s ease forwards;
