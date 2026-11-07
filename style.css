@@ -137,12 +137,14 @@ h1 {
 .version-list {
     display: flex;
     flex-direction: column;
+    align-items: stretch;
     gap: 16px;
     width: 100%;
     max-width: 520px;
 }
 
 .version-card {
+    flex: 1.2;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -223,6 +225,138 @@ h1 {
     height: 16px;
 }
 
+/* 源代码卡片（右上角小悬浮窗） */
+.source-card {
+    position: fixed;
+    top: 96px;
+    right: 24px;
+    width: 200px;
+    z-index: 50;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 16px;
+    background: rgba(20, 20, 20, 0.72);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 14px;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.8s ease forwards;
+    animation-delay: 0.5s;
+    transition: all 0.3s ease;
+}
+
+.source-card:hover {
+    background: rgba(255, 255, 255, 0.07);
+    border-color: rgba(160, 232, 216, 0.2);
+    transform: translateY(-2px);
+}
+
+.source-head {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.source-icon {
+    width: 16px;
+    height: 16px;
+    color: #a0e8d8;
+}
+
+.source-title {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.source-desc {
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.45);
+}
+
+.source-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    background: transparent;
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 999px;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.source-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: #fff;
+    transform: translateY(-2px);
+}
+
+.source-btn svg {
+    width: 13px;
+    height: 13px;
+}
+
+/* 源代码密码 */
+.source-pwd-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 10px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+}
+
+.source-pwd-label {
+    font-size: 10px;
+    color: rgba(255, 255, 255, 0.4);
+    background: rgba(255, 255, 255, 0.08);
+    padding: 1px 6px;
+    border-radius: 4px;
+    flex-shrink: 0;
+}
+
+.source-pwd {
+    font-family: "SF Mono", "Consolas", monospace;
+    font-size: 12px;
+    color: #a0e8d8;
+}
+
+.source-pwd-copy {
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.6);
+    cursor: pointer;
+    padding: 2px 8px;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.08);
+    transition: all 0.2s ease;
+    margin-left: auto;
+    user-select: none;
+}
+
+.source-pwd-copy:hover {
+    background: rgba(255, 255, 255, 0.15);
+    color: #fff;
+}
+
+.source-pwd-copy.copied {
+    background: #a0e8d8;
+    color: #000;
+}
+
+.source-note {
+    font-size: 10px;
+    color: rgba(255, 255, 255, 0.35);
+}
+
 /* 页脚 */
 footer {
     position: fixed;
@@ -237,6 +371,14 @@ footer {
 }
 
 /* 响应式 */
+@media (max-width: 900px) {
+    .source-card {
+        position: static;
+        width: 100%;
+        max-width: 520px;
+    }
+}
+
 @media (max-width: 640px) {
     nav {
         padding: 16px 20px;
@@ -248,6 +390,10 @@ footer {
         padding: 6px 14px;
         font-size: 13px;
     }
+    .version-list {
+        flex-direction: column;
+        max-width: 520px;
+    }
     .version-card {
         flex-direction: column;
         align-items: stretch;
@@ -256,5 +402,359 @@ footer {
     }
     .version-btn {
         justify-content: center;
+    }
+}
+
+/* ===== 导航栏登录 ===== */
+.nav-login {
+    padding: 8px 20px;
+    background: transparent;
+    color: rgba(255, 255, 255, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 999px;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.nav-login:hover {
+    color: #fff;
+    border-color: rgba(255, 255, 255, 0.4);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.nav-login.logged-in {
+    color: #a0e8d8;
+    border-color: rgba(160, 232, 216, 0.4);
+}
+
+.nav-login.logged-in::before {
+    content: "";
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    margin-right: 6px;
+    border-radius: 50%;
+    background: #a0e8d8;
+    vertical-align: middle;
+}
+
+/* 登录窗口 */
+.login-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    z-index: 200;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.login-modal.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.login-mask {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.72);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+}
+
+.login-box {
+    position: relative;
+    width: 100%;
+    max-width: 340px;
+    padding: 30px 28px 28px;
+    background: rgba(18, 18, 18, 0.96);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 18px;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+    transform: translateY(16px) scale(0.97);
+    transition: transform 0.3s ease;
+}
+
+.login-modal.active .login-box {
+    transform: translateY(0) scale(1);
+}
+
+.login-close {
+    position: absolute;
+    top: 12px;
+    right: 16px;
+    font-size: 22px;
+    line-height: 1;
+    color: rgba(255, 255, 255, 0.4);
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.login-close:hover {
+    color: #fff;
+}
+
+.login-title {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+
+.login-desc {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.45);
+    margin-bottom: 20px;
+}
+
+.login-input {
+    display: block;
+    width: 100%;
+    padding: 12px 14px;
+    margin-bottom: 12px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    color: #fff;
+    font-family: inherit;
+    font-size: 14px;
+    outline: none;
+    transition: all 0.2s ease;
+}
+
+.login-input::placeholder {
+    color: rgba(255, 255, 255, 0.3);
+}
+
+.login-input:focus {
+    background: rgba(255, 255, 255, 0.09);
+    border-color: rgba(160, 232, 216, 0.5);
+}
+
+.login-error {
+    min-height: 16px;
+    margin-bottom: 8px;
+    font-size: 12px;
+    color: #ff7b7b;
+}
+
+.login-submit {
+    width: 100%;
+    padding: 12px;
+    background: #fff;
+    color: #000;
+    border: none;
+    border-radius: 10px;
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+}
+
+.login-submit:hover {
+    opacity: 0.85;
+}
+
+/* 登录 / 注册 面板切换 */
+.login-pane {
+    display: block;
+}
+
+.pane-register {
+    display: none;
+}
+
+.login-box.mode-register .pane-login {
+    display: none;
+}
+
+.login-box.mode-register .pane-register {
+    display: block;
+}
+
+.login-switch {
+    margin-top: 14px;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.4);
+    text-align: center;
+}
+
+.login-switch-btn {
+    margin-left: 4px;
+    padding: 0;
+    background: none;
+    border: none;
+    color: #a0e8d8;
+    font-family: inherit;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.login-switch-btn:hover {
+    text-decoration: underline;
+}
+
+/* 导航栏登录按钮的小人图标 */
+.nav-login {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+}
+
+.nav-login-icon {
+    width: 15px;
+    height: 15px;
+    flex: 0 0 auto;
+    opacity: 0.9;
+}
+
+/* 已登录时用小人图标代替原来的小圆点 */
+.nav-login.logged-in::before {
+    content: none;
+    display: none;
+}
+
+/* 账户仅保存在本地浏览器的提示 */
+.login-tip {
+    margin-top: 10px;
+    font-size: 11px;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.28);
+    text-align: center;
+}
+
+/* 管理代码输入框 */
+.reg-code-label {
+    display: block;
+    margin: 0 0 6px;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.45);
+    text-align: left;
+}
+
+.login-input.reg-code::placeholder {
+    color: rgba(255, 86, 86, 0.85);
+}
+
+/* 账户菜单里的管理员信息 */
+.account-admin {
+    padding: 8px 14px 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.account-admin-title {
+    margin: 0 0 4px;
+    font-size: 12px;
+    color: #a0e8d8;
+}
+
+.account-admin-code {
+    margin: 0;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.5);
+    white-space: nowrap;
+}
+
+.account-admin-code span {
+    color: #fff;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+}
+
+/* 管理员的“下载源代码”入口按普通菜单项显示 */
+a.account-menu-item {
+    text-decoration: none;
+}
+
+.login-box.shake {
+    animation: loginShake 0.35s ease;
+}
+
+@keyframes loginShake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-8px); }
+    75% { transform: translateX(8px); }
+}
+
+/* 账户菜单 */
+.account-menu {
+    position: fixed;
+    top: 84px;
+    right: 48px;
+    z-index: 150;
+    padding: 8px;
+    background: rgba(20, 20, 20, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-6px);
+    transition: all 0.25s ease;
+}
+
+.account-menu.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.account-menu-item {
+    display: block;
+    width: 100%;
+    padding: 9px 14px;
+    background: none;
+    border: none;
+    border-radius: 8px;
+    color: rgba(255, 255, 255, 0.75);
+    font-family: inherit;
+    font-size: 13px;
+    text-align: left;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.account-menu-item:hover {
+    background: rgba(255, 255, 255, 0.08);
+    color: #fff;
+}
+
+@media (max-width: 640px) {
+    .nav-login {
+        padding: 6px 14px;
+        font-size: 13px;
+    }
+    .account-menu {
+        top: 70px;
+        right: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .nav-links {
+        gap: 4px;
+    }
+    .nav-link {
+        padding: 6px 10px;
+        font-size: 12.5px;
+    }
+    .nav-login {
+        padding: 6px 10px;
+        font-size: 12.5px;
     }
 }

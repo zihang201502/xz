@@ -18,6 +18,7 @@
             <a href="https://cumulusos.pages.dev/#intro" class="nav-link">简介</a>
             <a href="index.html" class="nav-link active">下载</a>
             <a href="https://cumulusos.pages.dev/#about" class="nav-link">关于我们</a>
+            <button class="nav-login" id="navLogin" type="button"><svg class="nav-login-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span id="navLoginLabel">登录</span></button>
         </div>
     </nav>
 
@@ -44,8 +45,76 @@
                     下载
                 </a>
             </div>
+
+            <div class="source-card" id="sourceWindow" style="display: none;">
+                <div class="source-head">
+                    <svg class="source-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="16 18 22 12 16 6"></polyline>
+                        <polyline points="8 6 2 12 8 18"></polyline>
+                    </svg>
+                    <span class="source-title">源代码</span>
+                </div>
+                <p class="source-desc">仅供学习与二次开发</p>
+                <div class="source-pwd-row">
+                    <span class="source-pwd-label">密码</span>
+                    <span class="source-pwd" id="sourcePwd">9bec</span>
+                    <span class="source-pwd-copy" id="sourcePwdCopy">复制</span>
+                </div>
+                <a href="https://wwbgf.lanzouu.com/ivONO4f3suja" target="_blank" rel="noopener noreferrer" class="source-btn" id="sourceBtn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                        <polyline points="7 10 12 15 17 10"></polyline>
+                        <line x1="12" y1="15" x2="12" y2="3"></line>
+                    </svg>
+                    下载源代码
+                </a>
+                <p class="source-note">需用 AstraEditor 编辑器打开</p>
+            </div>
         </div>
     </main>
+
+    <!-- 登录 / 创建账户窗口 -->
+    <div class="login-modal" id="loginModal">
+        <div class="login-mask" id="loginMask"></div>
+        <div class="login-box" id="loginBox" role="dialog" aria-modal="true" aria-labelledby="loginTitle">
+            <span class="login-close" id="loginClose">&times;</span>
+            <h2 class="login-title" id="loginTitle">登录</h2>
+            <p class="login-desc" id="loginDesc">登录后可以使用账户相关功能</p>
+
+            <form class="login-pane pane-login" id="loginForm" autocomplete="off">
+                <input class="login-input" type="text" id="loginUser" placeholder="用户名" autocomplete="username">
+                <input class="login-input" type="password" id="loginPass" placeholder="密码" autocomplete="current-password">
+                <p class="login-error" id="loginError"></p>
+                <button class="login-submit" type="submit">登录</button>
+            </form>
+
+            <form class="login-pane pane-register" id="registerForm" autocomplete="off">
+                <input class="login-input" type="text" id="regUser" placeholder="用户名（2-16 个字符）" autocomplete="username">
+                <input class="login-input" type="password" id="regPass" placeholder="密码（至少 6 位）" autocomplete="new-password">
+                <input class="login-input" type="password" id="regPass2" placeholder="再次输入密码" autocomplete="new-password">
+                <label class="reg-code-label" for="regCode">*管理代码</label>
+                <input class="login-input reg-code" type="text" id="regCode" placeholder="不要乱动！" autocomplete="off" maxlength="6" inputmode="numeric">
+                <p class="login-error" id="regError"></p>
+                <button class="login-submit" type="submit">创建账户</button>
+            </form>
+
+            <p class="login-switch">
+                <span id="switchTip">还没有账户？</span>
+                <button class="login-switch-btn" id="switchBtn" type="button">创建一个</button>
+            </p>
+            <p class="login-tip">账户只保存在当前浏览器<br>换设备或清除缓存后需要重新创建</p>
+        </div>
+    </div>
+
+    <!-- 账户菜单 -->
+    <div class="account-menu" id="accountMenu">
+        <div class="account-admin" id="accountAdmin" style="display: none;">
+            <p class="account-admin-title">管理员账户</p>
+            <p class="account-admin-code">本次管理代码 <span id="accountCode">------</span></p>
+        </div>
+        <a class="account-menu-item" id="sourceItem" href="https://wwbgf.lanzouu.com/ivONO4f3suja" target="_blank" rel="noopener" style="display: none;">下载源代码</a>
+        <button class="account-menu-item" id="logoutBtn" type="button">退出登录</button>
+    </div>
 
     <footer>
         &copy; 2026 Cumulus OS. All rights reserved.
